@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Ye Live in Jakarta 2026 – Pilih Kursi dan Beli Tiket</title>
+
+  <!-- Font dari Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- ===== HEADER ===== -->
+    <header>
+      <span>PANGGUNG</span>
+      <a href="#pilih" style="color:inherit">Pilih kursi</a>
+    </header>
+
+    <!-- ===== HALAMAN 1: PILIH KATEGORI (hilang saat masuk checkout) ===== -->
+    <div id="v1">
+
+      <!-- Hero: judul besar + ilustrasi globe -->
+      <div class="hero">
+        <div>
+          <h1>Ye Live in Jakarta</h1>
+          <p class="sub">
+            Satu panggung berbentuk globe di Stadion Utama GBK.
+            Pilih zona dari denah, lihat total bayarnya, lalu pesan tiketmu.
+          </p>
+        </div>
+        <div class="globe" role="img" aria-label="Ilustrasi globe panggung"></div>
+      </div>
+
+      <!-- Kotak fakta: tanggal, lokasi, hitung mundur, jumlah kategori -->
+      <div class="facts">
+        <div>
+          <b>24 Okt 2026</b>
+          <span>Tanggal konser</span>
+        </div>
+        <div>
+          <b>SUGBK</b>
+          <span>Stadion Utama Gelora Bung Karno</span>
+        </div>
+        <div>
+          <b id="cd">–</b>
+          <span>Menuju hari konser</span>
+        </div>
+        <div>
+          <b>8 kategori</b>
+          <span>Rp1.875.000 sampai Rp9.850.000</span>
+        </div>
+      </div>
+
+      <!-- Bagian: Pilih zona (denah + daftar harga + panel pembelian) -->
+      <section id="pilih">
+        <h2>Pilih zona</h2>
+        <p class="lead">
+          Klik zona di denah atau pilih dari daftar.
+          Denah hanya gambaran, lokasi dan ukuran asli bisa sedikit berbeda.
+        </p>
+
+        <div class="pick">
+          <div>
+
+            <!-- Denah stadion (SVG). Setiap zona punya atribut data-z yang dipakai js/main.js -->
+            <div class="map">
+              <svg viewBox="0 0 600 340" role="img"
+                   aria-label="Denah stadion: festival di tengah, dikelilingi CAT 1 sampai CAT 4 dan VIP">
+                <defs>
+                  <clipPath id="bands">
+                    <rect x="0" y="0" width="600" height="98" />
+                    <rect x="0" y="242" width="600" height="98" />
+                  </clipPath>
+                  <clipPath id="b1">
+                    <rect x="0" y="0" width="600" height="118" />
+                    <rect x="0" y="222" width="600" height="118" />
+                  </clipPath>
+                  <radialGradient id="gl" cx=".35" cy=".3">
+                    <stop offset="0" stop-color="#8FA4C9" />
+                    <stop offset=".5" stop-color="#2A3A63" />
+                    <stop offset="1" stop-color="#0B0F1E" />
+                  </radialGradient>
+                </defs>
+
+                <!-- Lapisan zona, dari terluar ke terdalam -->
+                <ellipse class="z" data-z="c4" cx="300" cy="170" rx="285" ry="162" fill="#D9C5B2" />
+                <ellipse class="z" data-z="c3" cx="300" cy="170" rx="285" ry="162" fill="#2B2927" clip-path="url(#bands)" />
+                <ellipse class="z" data-z="c2" cx="300" cy="170" rx="205" ry="114" fill="#7A6E68" />
+                <ellipse class="z" data-z="c1" cx="300" cy="170" rx="165" ry="90" fill="#B3A397" clip-path="url(#b1)" />
+                <rect class="z" data-z="vipE" x="255" y="80" width="90" height="34" fill="#5A504A" />
+                <rect class="z" data-z="vipW" x="255" y="226" width="90" height="34" fill="#5A504A" />
+                <ellipse class="z" data-z="fest" cx="300" cy="170" rx="158" ry="58" fill="#EADBCB" />
+
+                <!-- Garis pemisah Festival A dan B + globe di tengah -->
+                <line x1="300" y1="114" x2="300" y2="226" stroke="#B3A397" stroke-width="2" pointer-events="none" />
+                <circle cx="300" cy="170" r="15" fill="url(#gl)" pointer-events="none" />
+
+                <!-- Label zona -->
+                <g text-anchor="middle">
+                  <text x="300" y="52" fill="#fff">CAT 3A</text>
+                  <text x="300" y="296" fill="#fff">CAT 3B</text>
+                  <text x="58" y="174" fill="#1F1D1B">CAT 4A</text>
+                  <text x="542" y="174" fill="#1F1D1B">CAT 4B</text>
+                  <text x="120" y="174" fill="#fff" font-size="10">2A</text>
+                  <text x="480" y="174" fill="#fff" font-size="10">2B</text>
+                  <text x="205" y="102" fill="#1F1D1B" font-size="10">1A</text>
+                  <text x="395" y="102" fill="#1F1D1B" font-size="10">1B</text>
+                  <text x="205" y="244" fill="#1F1D1B" font-size="10">1A</text>
+                  <text x="395" y="244" fill="#1F1D1B" font-size="10">1B</text>
+                  <text x="300" y="102" fill="#fff" font-size="10">VIP EAST</text>
+                  <text x="300" y="248" fill="#fff" font-size="10">VIP WEST</text>
+                  <text x="225" y="174" fill="#1F1D1B" font-size="11">FESTIVAL A</text>
+                  <text x="375" y="174" fill="#1F1D1B" font-size="11">FESTIVAL B</text>
+                </g>
+              </svg>
+            </div>
+
+            <!-- Daftar zona + harga (diisi oleh js/main.js dari data di js/data.js) -->
+            <ul class="zl" id="zl"></ul>
+          </div>
+
+          <!-- Panel pembelian: zona terpilih, jumlah tiket, ringkasan harga -->
+          <aside class="panel" aria-live="polite">
+            <h3 id="pn">Pilih zona</h3>
+            <div class="meta" id="pd" style="color:var(--mute);font-size:14px">Belum ada zona dipilih.</div>
+
+            <div class="row">
+              <span>Jumlah tiket</span>
+              <div class="qty">
+                <button id="mi" aria-label="Kurangi tiket">−</button>
+                <output id="qn">1</output>
+                <button id="pl" aria-label="Tambah tiket">+</button>
+              </div>
+            </div>
+
+            <div class="sum" id="sm"></div>
+            <button class="btn" id="buy" disabled>Beli tiket</button>
+          </aside>
+        </div>
+      </section>
+
+      <!-- Bagian: Paket spesial -->
+      <section>
+        <h2>Paket spesial</h2>
+        <p class="lead">Dua kategori datang dengan paket tambahan.</p>
+
+        <div class="pk">
+          <div>
+            <h3>VIP West dan East</h3>
+            <ul>
+              <li>1 tiket kursi bernomor, sisi West atau East</li>
+              <li>Surprise Box Set A</li>
+              <li>Laminate dan lanyard VIP eksklusif</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Super Fans Festival</h3>
+            <ul>
+              <li>1 tiket festival berdiri</li>
+              <li>Akses masuk lebih awal ke area festival</li>
+              <li>Surprise Box Set B</li>
+              <li>Laminate dan lanyard Super Fans eksklusif</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bagian: Perlu tahu -->
+      <section>
+        <h2>Perlu tahu</h2>
+        <ul class="info">
+          <li>Harga belum termasuk pajak pemerintah 10%, biaya platform tiket 6%, dan biaya lain yang berlaku. Kalkulator di atas sudah menambahkan keduanya.</li>
+          <li>Nomor kursi diberikan mendekati hari konser lewat aplikasi LOKET.</li>
+          <li>Ada kemungkinan pandangan terhalang menara delay dan front of house (FOH).</li>
+          <li>Kursi untuk pengguna kursi roda jumlahnya tetap. Hubungi promotor untuk memesan.</li>
+          <li>Royal Suite dan Sky Box dipesan lewat WhatsApp promotor, tidak lewat halaman ini.</li>
+          <li>Promotor menyarankan menyiapkan akun LOKET dan melengkapi datanya sebelum membeli.</li>
+        </ul>
+      </section>
+
+    </div>
+    <!-- ===== AKHIR HALAMAN 1 ===== -->
+
+    <!-- ===== HALAMAN 2: CHECKOUT (isinya dibuat oleh js/checkout.js) ===== -->
+    <main id="v2" hidden></main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+      Halaman ini proyek portofolio desain web, bukan penjual resmi.
+      Data harga dan denah mengacu pada pengumuman promotor Raw Vision Collective.
+      Tiket asli hanya dijual di yejakarta.com. Pembelian di sini hanya simulasi okeii.
+    </footer>
+
+  </div>
+
+  <!-- Jendela e-tiket setelah pembayaran -->
+  <dialog id="dlg" aria-labelledby="dt"></dialog>
+
+  <!-- Urutan script penting: data dulu, lalu logika halaman, lalu checkout -->
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/countdown.js"></script>
+  <script src="js/checkout.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,673 @@
+/* ==========================================================
+   Ye Live in Jakarta 2026 - Gaya halaman
+   Daftar isi:
+   1. Warna dan pengaturan dasar
+   2. Header, tombol, hero
+   3. Kotak fakta dan bagian umum
+   4. Denah, daftar zona, panel pembelian
+   5. Paket spesial dan info
+   6. Footer dan jendela e-tiket
+   7. Halaman checkout
+   8. Layar kecil dan preferensi gerak
+   ========================================================== */
+
+
+/* ---------- 1. Warna dan pengaturan dasar ---------- */
+
+:root {
+  --bg: #E9DFD3;
+  --card: #F6F0E8;
+  --ink: #1F1D1B;
+  --mute: #6B605A;
+  --line: #CDBFB0;
+  --blue: #2347FF;
+  --on-blue: #fff;
+
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Mode gelap otomatis mengikuti pengaturan perangkat */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #171513;
+    --card: #221F1C;
+    --ink: #EFE6DB;
+    --mute: #A89C92;
+    --line: #3A3531;
+    --blue: #6C86FF;
+    --on-blue: #10131F;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #171513;
+  --card: #221F1C;
+  --ink: #EFE6DB;
+  --mute: #A89C92;
+  --line: #3A3531;
+  --blue: #6C86FF;
+  --on-blue: #10131F;
+}
+
+html {
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 16px/1.55 "Space Mono", ui-monospace, monospace;
+}
+
+h1,
+h2,
+h3 {
+  font-family: Archivo, system-ui, sans-serif;
+  margin: 0;
+  line-height: .95;
+  letter-spacing: -.03em;
+  font-weight: 900;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+
+/* ---------- 2. Header, tombol, hero ---------- */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 0;
+  font-weight: 700;
+}
+
+.btn {
+  border: 0;
+  border-radius: 0;
+  padding: 14px 22px;
+  font-weight: 700;
+  cursor: pointer;
+  background: var(--blue);
+  color: var(--on-blue);
+  width: 100%;
+}
+
+.btn.line {
+  background: transparent;
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  width: auto;
+}
+
+.btn:disabled {
+  opacity: .35;
+  cursor: not-allowed;
+}
+
+.hero {
+  padding: 28px 0 56px;
+  display: grid;
+  grid-template-columns: 1.25fr .75fr;
+  gap: 32px;
+  align-items: end;
+}
+
+.hero h1 {
+  font-size: clamp(56px, 11vw, 140px);
+  text-transform: uppercase;
+}
+
+.hero .sub {
+  margin: 22px 0 0;
+  max-width: 46ch;
+  color: var(--mute);
+}
+
+.globe {
+  width: min(100%, 260px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  margin-left: auto;
+  background: radial-gradient(circle at 35% 30%, #8FA4C9, #2A3A63 45%, #0B0F1E 75%);
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .5);
+  background-size: 140% 140%;
+  animation: spin 14s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    background-position: 100% 60%;
+  }
+}
+
+
+/* ---------- 3. Kotak fakta dan bagian umum ---------- */
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+
+.facts div {
+  padding: 16px 14px;
+  border-right: 1px solid var(--line);
+}
+
+.facts div:last-child {
+  border: 0;
+}
+
+.facts b {
+  display: block;
+  font: 800 26px Archivo, sans-serif;
+  letter-spacing: -.02em;
+}
+
+.facts span {
+  color: var(--mute);
+  font-size: 13px;
+}
+
+section {
+  padding: 56px 0 0;
+}
+
+section > h2 {
+  font-size: clamp(34px, 5vw, 56px);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.lead {
+  color: var(--mute);
+  margin: 0 0 24px;
+  max-width: 60ch;
+}
+
+
+/* ---------- 4. Denah, daftar zona, panel pembelian ---------- */
+
+.pick {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.map {
+  background: var(--card);
+  padding: 12px;
+  border: 1px solid var(--line);
+}
+
+.map svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.map text {
+  font: 700 12px "Space Mono", monospace;
+  pointer-events: none;
+}
+
+/* Zona di denah */
+.z {
+  cursor: pointer;
+  stroke: var(--bg);
+  stroke-width: 2;
+  transition: filter .15s;
+}
+
+.z:hover {
+  filter: brightness(1.12);
+}
+
+.z.on {
+  stroke: var(--blue);
+  stroke-width: 5;
+}
+
+/* Daftar zona di bawah denah */
+.zl {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.zl button {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 18px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  text-align: left;
+  background: transparent;
+  border: 1px solid var(--line);
+  padding: 10px 12px;
+  cursor: pointer;
+}
+
+.zl button[aria-pressed="true"] {
+  border: 2px solid var(--blue);
+  background: var(--card);
+}
+
+.sw {
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--ink);
+}
+
+.zl em {
+  font-style: normal;
+  color: var(--mute);
+  font-size: 12px;
+  display: block;
+}
+
+/* Panel pembelian di sisi kanan */
+.panel {
+  background: var(--card);
+  border: 2px solid var(--ink);
+  padding: 20px;
+  display: grid;
+  gap: 14px;
+  position: sticky;
+  top: 12px;
+}
+
+.panel h3 {
+  font-size: 30px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.qty {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.qty button {
+  width: 38px;
+  height: 38px;
+  border: 2px solid var(--ink);
+  background: transparent;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.qty output {
+  min-width: 22px;
+  text-align: center;
+  font-weight: 700;
+}
+
+label {
+  display: grid;
+  gap: 4px;
+  font-size: 13px;
+}
+
+label input {
+  border: 2px solid var(--line);
+  background: transparent;
+  padding: 10px;
+}
+
+/* Ringkasan harga */
+.sum {
+  border-top: 1px dashed var(--ink);
+  padding-top: 12px;
+  display: grid;
+  gap: 4px;
+  font-size: 14px;
+}
+
+.sum .t {
+  font: 900 24px Archivo, sans-serif;
+  letter-spacing: -.02em;
+  margin-top: 6px;
+}
+
+.err {
+  color: var(--blue);
+  min-height: 20px;
+  margin: 0;
+  font-size: 13px;
+}
+
+
+/* ---------- 5. Paket spesial dan info ---------- */
+
+.pk {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.pk div {
+  border: 2px solid var(--ink);
+  padding: 22px;
+}
+
+.pk h3 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.pk ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--mute);
+}
+
+.info {
+  columns: 2;
+  gap: 36px;
+  padding-left: 18px;
+  color: var(--mute);
+}
+
+.info li {
+  margin-bottom: 10px;
+  break-inside: avoid;
+}
+
+
+/* ---------- 6. Footer dan jendela e-tiket ---------- */
+
+footer {
+  margin-top: 64px;
+  border-top: 2px solid var(--ink);
+  padding: 22px 0 44px;
+  color: var(--mute);
+  font-size: 13px;
+}
+
+dialog {
+  border: 2px solid var(--ink);
+  padding: 0;
+  width: min(520px, calc(100% - 24px));
+  background: var(--bg);
+  color: var(--ink);
+}
+
+dialog::backdrop {
+  background: rgba(10, 8, 6, .65);
+}
+
+.tk {
+  padding: 24px;
+  display: grid;
+  gap: 14px;
+}
+
+.tk h3 {
+  font-size: 34px;
+  text-transform: uppercase;
+}
+
+.stub {
+  border: 2px dashed var(--ink);
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  background: var(--card);
+}
+
+/* Pola mirip QR (hanya hiasan) */
+.qr {
+  width: 84px;
+  height: 84px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.qr b {
+  background: var(--ink);
+}
+
+.qr b.o {
+  background: transparent;
+}
+
+
+/* ---------- 7. Halaman checkout ---------- */
+
+/* Penunjuk langkah */
+.steps {
+  list-style: none;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 8px 0 18px;
+  padding: 0;
+  font-size: 13px;
+}
+
+.steps li {
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  color: var(--mute);
+}
+
+.steps .c {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+
+.steps .d {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.timer {
+  background: var(--blue);
+  color: var(--on-blue);
+  padding: 12px 16px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* Tata letak: formulir di kiri, ringkasan di kanan */
+.co {
+  display: grid;
+  grid-template-columns: 1.3fr .7fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  padding: 24px;
+  display: grid;
+  gap: 14px;
+}
+
+.card h2 {
+  font-size: 34px;
+  text-transform: uppercase;
+}
+
+.card h3 {
+  font-size: 24px;
+}
+
+.g2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.r {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.r input {
+  width: auto;
+}
+
+.nav {
+  display: flex;
+  gap: 12px;
+}
+
+.nav .btn {
+  width: auto;
+  flex: 1;
+}
+
+/* Pilihan metode pembayaran */
+.pm {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.pt {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  text-align: left;
+  background: transparent;
+  border: 1px solid var(--line);
+  padding: 10px;
+  cursor: pointer;
+}
+
+.pt[aria-checked="true"] {
+  border: 2px solid var(--blue);
+  background: var(--bg);
+}
+
+.bd {
+  min-width: 64px;
+  padding: 9px 6px;
+  text-align: center;
+  font: 800 12px Archivo, sans-serif;
+}
+
+/* Daftar data di halaman konfirmasi */
+.dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 16px;
+  margin: 0;
+}
+
+.dl dt {
+  color: var(--mute);
+}
+
+.dl dd {
+  margin: 0;
+  word-break: break-word;
+}
+
+.mute {
+  color: var(--mute);
+  font-size: 13px;
+  margin: 0;
+}
+
+
+/* ---------- 8. Layar kecil dan preferensi gerak ---------- */
+
+@media (max-width: 820px) {
+  .hero,
+  .pick,
+  .pk,
+  .co {
+    grid-template-columns: 1fr;
+  }
+
+  .g2 {
+    grid-template-columns: 1fr;
+  }
+
+  .globe {
+    margin: 0;
+    width: 160px;
+  }
+
+  .facts {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .facts div:nth-child(2) {
+    border-right: 0;
+  }
+
+  .facts div:nth-child(-n+2) {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .info {
+    columns: 1;
+  }
+
+  .panel {
+    position: static;
+  }
+}
+
+/* Hormati pengguna yang mematikan animasi di perangkatnya */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
